@@ -1,0 +1,96 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+body {
+	background-color: rgb(122, 186, 92);
+}
+
+#task {
+	background-color: rgb(73, 228, 233);
+	width: 200px;
+	height: 30px;
+	border: none;
+	border-radius: 15px;
+	padding: 8px;
+}
+#add {
+	background-color: rgb(255, 118, 230);
+	width: 60px;
+	height: 28px;
+	border: none;
+	border-radius: 20px;
+}
+#set {
+	cursor: pointer;
+	margin-top: 10px;
+	width: 90px;
+	height: 28px;
+	border: none;
+	border-radius: 20px;
+	background-color: rgb(237, 90, 119);
+}
+.de {
+	margin-left: 5px;
+	cursor: pointer;
+	font-size: 20px;
+}
+#done {
+	cursor: pointer;
+	margin-left: 39%;
+	display: none;
+	width: 90px;
+	height: 28px;
+	border: none;
+	border-radius: 20px;
+	background-color: rgb(135, 54, 193);
+}
+#chknx {
+	width: 80px;
+}
+#tasks {
+	font-size: 20px;
+}
+.mainContainer {
+	background-color: aliceblue;
+	height: 500px;
+	width: 400px;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 10%;
+	left: 37%;
+}
+#liOfTask {
+	margin-left: 30px;
+}
+
+.firContainer {
+	margin-top: 30px;
+	margin-left: 30px;
+}
+.secContainer {
+	margin-top: 30px;
+	margin-left: 30px;
+}
+.chk {
+	width: 20px;
+}
+.winner {
+	width: 600px;
+	height: 150px;
+	font-weight: 900;
+	font-size: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(67deg, #7cff5e, #acff83);
+	border-radius: 20px;
+	position: absolute;
+	top: 38%;
+	left: 31%;
+	box-shadow: rgba(0 0 0) 9px 1px 50px;
+}
+.whid {
+	display: none;
+}
