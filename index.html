@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- <link rel="stylesheet" href="style.css" /> -->
+		<title>To-do</title>
+		<style>
+			* {
+	padding: 0;
+	margin: 0;
+}
+body {
+	background-color: rgb(122, 186, 92);
+}
+
+#task {
+	background-color: rgb(73, 228, 233);
+	width: 200px;
+	height: 30px;
+	border: none;
+	border-radius: 15px;
+	padding: 8px;
+}
+#add {
+	background-color: rgb(255, 118, 230);
+	width: 60px;
+	height: 28px;
+	border: none;
+	border-radius: 20px;
+}
+#set {
+	cursor: pointer;
+	margin-top: 10px;
+	width: 90px;
+	height: 28px;
+	border: none;
+	border-radius: 20px;
+	background-color: rgb(237, 90, 119);
+}
+.de {
+	margin-left: 5px;
+	cursor: pointer;
+	font-size: 20px;
+}
+#done {
+	cursor: pointer;
+	margin-left: 39%;
+	display: none;
+	width: 90px;
+	height: 28px;
+	border: none;
+	border-radius: 20px;
+	background-color: rgb(135, 54, 193);
+}
+#chknx {
+	width: 80px;
+}
+#tasks {
+	font-size: 20px;
+}
+.mainContainer {
+	background-color: aliceblue;
+	height: 500px;
+	width: 400px;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 10%;
+	left: 37%;
+}
+#liOfTask {
+	margin-left: 30px;
+}
+
+.firContainer {
+	margin-top: 30px;
+	margin-left: 30px;
+}
+.secContainer {
+	margin-top: 30px;
+	margin-left: 30px;
+}
+.chk {
+	width: 20px;
+}
+.winner {
+	width: 600px;
+	height: 150px;
+	font-weight: 900;
+	font-size: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(67deg, #7cff5e, #acff83);
+	border-radius: 20px;
+	position: absolute;
+	top: 38%;
+	left: 31%;
+	box-shadow: rgba(0 0 0) 9px 1px 50px;
+}
+.whid {
+	display: none;
+}
+@media only screen and (max-width: 400px) {
+	body {
+		background-color: lightskyblue;
+
+	}
+	.mainContainer {
+		top: 20%;
+		left: -1%;
+	}
+	.winner {
+		width: 300px;
+		left: 11%;
+		height: 250px;
+	background: linear-gradient(97deg, #ff83f1, #d45eff);
+
+	}
+}
+
+		</style>
+	</head>
+
+	<body>
+		
+		<h1><center>TO-DO LIST</center></h1>
+		<div class="mainContainer ">
+			<div class="firContainer">
+				<center>
+					<input id="task" placeholder=" Your Tasks" />
+					<button id="add">Add</button>
+				</center>
+				<p>
+					<center><button id="set">SET</button></center>
+				</p>
+			</div>
+			<div class="secContainer" >
+				<h3>Tasks Need To Be Completed</h3>
+				<ol id="liOfTask">
+					 <!-- <li> 
+								<input type="checkbox" /> TASKS
+								<span  class="del">❌</span>
+                     </li>  -->
+				</ol>
+				<span> <button id="done">DONE</button></span>
+			</div>
+
+			<div id="result"></div>
+		</div>
+		<div class="winner whid">
+  
+			<button class="close" onclick="closedd()">X</button>
+			<span>Congragulations,Playerssssss Wins </span>
+			
+			</div>
+		<script >
+			let mainCon = document.querySelector('.mainContainer');
+let task = document.getElementById('task');
+let add = document.getElementById('add');
+let liOfTask = document.getElementById('liOfTask');
+let set = document.getElementById('set');
+let done = document.getElementById('done');
+let addedTasks;
+let adc = 0;
+let chc = 0;
+set.disabled = true;
+
+document.addEventListener('keydown', function (e) {
+	if (e.key === 'Enter') {
+		if (task.value != String) {
+			alert('Task cannot be Empty');
+		} else {
+			addedTasks = task.value;
+			let html = ` <li id="tasks"> <input type="checkbox" class="chk" id="cbox" onclick="check()"  />${addedTasks.toUpperCase()} <span onclick=del() class="de" > <button>del task</button> ${new Date().getFullYear()}</span> </li>`;
+			liOfTask.insertAdjacentHTML('beforeend', html);
+			task.value = '';
+			adc++;
+			set.disabled = false;
+		}
+	}
+});
+
+add.addEventListener('click', function () {
+	if (task.value === '') {
+		alert('Task cannot be Empty');
+	} else {
+		addedTasks = task.value;
+		let html = ` <li id="tasks"> <input type="checkbox" class="chk" id="cbox" onclick="check()"  />${addedTasks.toUpperCase()} <span onclick=del() class="de" ><button>del task</button></span> </li>`;
+		liOfTask.insertAdjacentHTML('beforeend', html);
+		task.value = '';
+		adc++;
+		set.disabled = false;
+	}
+});
+
+function check() {
+	let checkboxes = document.querySelectorAll('.chk');
+	chc = 0;
+
+	checkboxes.forEach((checkbox) => {
+		if (checkbox.checked) {
+			chc++;
+		}
+	});
+}
+function del() {
+	let listItem = this.event.currentTarget.parentNode;
+	listItem.parentNode.removeChild(listItem);
+	adc--; // Decrement the count of total tasks
+	if (adc === 0) {
+		set.disabled = true; // Disable the 'Set' button if there are no tasks left
+	}
+}
+set.addEventListener('click', function () {
+	add.disabled = true;
+	task.disabled = true;
+	set.disabled = true;
+	done.style.display = 'inline';
+
+	let deleteIcons = document.querySelectorAll('.de');
+	deleteIcons.forEach((icon) => {
+		icon.style.display = 'none';
+	});
+});
+let winner = document.querySelector('.winner');
+
+done.addEventListener('click', function () {
+	mainCon.style.display = 'none';
+	winner.innerHTML = `<center> <h1 sytle="color:red"> you completed  ${Math.floor(
+		(chc / adc) * 100
+	)}% of Your Task</h1>  </center> `;
+	winner.classList.toggle('whid');
+});
+
+		</script>
+		</select>
+	</body>
+</html>
